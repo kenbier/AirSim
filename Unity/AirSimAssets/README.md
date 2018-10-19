@@ -79,20 +79,7 @@ Once all the assets are included, follow the steps as mentioned below :
     {
     "SimMode": "Multirotor",
     "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings.md",
-    "SettingsVersion": 1.2,
-    "Vehicles": {
-        "SimpleFlight": {
-        "VehicleType": "SimpleFlight",
-        "DefaultVehicleState": "Armed",
-        "EnableCollisionPassthrogh": false,
-        "EnableCollisions": true,
-        "AllowAPIAlways": true,
-        "RC": {
-            "RemoteControlID": 0,
-            "AllowAPIWhenDisconnected": false
-        }
-        }
-    }
+    "SettingsVersion": 1.2
     }
 >>>
 

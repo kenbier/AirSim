@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEditor;
 
 namespace AirSimUnity {
@@ -145,7 +146,7 @@ namespace AirSimUnity {
         public SimpleFlightSettings SimpleFlight;
         public PX4Settings PX4;
 
-        private static AirSimSettings settings;
+        private static AirSimSettings settings = null;
 
         public static AirSimSettings GetSettings() {
             return settings;
@@ -160,11 +161,6 @@ namespace AirSimUnity {
             }
 
             string jsonString = GetSettingsContent();
-            if (jsonString == String.Empty) {
-                EditorUtility.DisplayDialog("Missing 'Settings.json' file!!!", "'Settings.json' file either not present or not configured properly.", "Exit");
-                return false;
-            }
-
             JsonUtility.FromJsonOverwrite(jsonString, settings);
             return true;
         }
@@ -198,11 +194,7 @@ namespace AirSimUnity {
 
         //Get the settings from the "setting.json" file.
         private static string GetSettingsContent() {
-            var fileName = GetFileName();
-            if (fileName == String.Empty)
-            {
-                return String.Empty;
-            }
+            var fileName = InitializeAirSim.GetAirSimSettingsFileName();
 
             string content = "";
             try {
@@ -222,21 +214,7 @@ namespace AirSimUnity {
             }
             return content;
         }
-
-        private static string GetFileName() {
-            string fileName = Application.dataPath + "\\..\\settings.json";
-            if (File.Exists(fileName)) {
-                return fileName;
-            }
-
-            fileName = AIRSIM_DATA_FOLDER + "\\settings.json";
-            if (File.Exists(fileName)) {
-                return fileName;
-            }
-
-            return String.Empty;
-          }
-
+        
         private void SetDefaults() {
             Recording.RecordInterval = 0.05f;
             Recording.RecordOnMove = false;

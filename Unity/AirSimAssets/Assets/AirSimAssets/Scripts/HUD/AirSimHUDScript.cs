@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AirSimUnity {
     /*
@@ -13,10 +14,10 @@ namespace AirSimUnity {
         private bool isViewCamerasSet;
 
         private void Awake() {
-            //Needs to be the first initialization in the Simulation.
-            if (!AirSimSettings.Initialize())
+            //Needs to be the first initialization in the Simulation if not done.
+            if (AirSimSettings.GetSettings() == null)
             {
-                EditorApplication.Exit(1);
+                AirSimSettings.Initialize();
             }
         }
 
@@ -26,16 +27,31 @@ namespace AirSimUnity {
 
         private void LateUpdate() {
             //Input setup for toggling the Window views on the screen.
-            if (Input.GetKeyDown(KeyCode.Alpha1) & isViewCamerasSet) {
+            if (Input.GetKeyDown(KeyCode.Alpha0) & isViewCamerasSet)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    cameraViews[i].SetActive(!cameraViews[i].activeInHierarchy);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha1) & isViewCamerasSet)
+            {
                 cameraViews[0].SetActive(!cameraViews[0].activeInHierarchy);
-            } else if (Input.GetKeyDown(KeyCode.Alpha2) & isViewCamerasSet) {
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) & isViewCamerasSet)
+            {
                 cameraViews[1].SetActive(!cameraViews[1].activeInHierarchy);
-            } else if (Input.GetKeyDown(KeyCode.Alpha3) & isViewCamerasSet) {
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) & isViewCamerasSet)
+            {
                 cameraViews[2].SetActive(!cameraViews[2].activeInHierarchy);
-            } else if (Input.GetKeyDown(KeyCode.Escape)) {
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
                 Application.Quit();
             }
         }
+
 
         //This method is linked through OnClick for RecordButton in AirSimHUD prefab.
         public void ToggleRecording() {
