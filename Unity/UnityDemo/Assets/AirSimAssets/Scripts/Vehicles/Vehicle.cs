@@ -2,6 +2,7 @@
 using AirSimUnity.DroneStructs;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 
 namespace AirSimUnity {
@@ -54,6 +55,12 @@ namespace AirSimUnity {
 
             airsimInterface = VehicleCompanion.GetVehicleCompanion(this);
             isServerStarted = airsimInterface.StartVehicleServer(AirSimSettings.GetSettings().LocalHostIP);
+
+            if (isServerStarted == false)
+            {
+                EditorUtility.DisplayDialog("Problem in starting AirSim server!!!", "Please check logs for more information.", "Exit");
+                EditorApplication.Exit(1);
+            }
         }
 
         //Ensure to call this method as the first statement, from derived class `FixedUpdate()` method.

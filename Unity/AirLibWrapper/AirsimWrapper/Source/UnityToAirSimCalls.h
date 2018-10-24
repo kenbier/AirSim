@@ -3,17 +3,16 @@
 #include <thread>
 #include "UnityUtilities.hpp"
 #include "SimHUD/SimHUD.h"
+#include "Logger.h"
 
 static SimHUD* key = nullptr;
 
-void StartServerThread(std::string vehicle_name, std::string sim_mode_name, int port_number)
-{
-	key = new SimHUD(vehicle_name, sim_mode_name, port_number);
-	key->BeginPlay();
-}
+void StartServerThread(std::string vehicle_name, std::string sim_mode_name, int port_number);
 
 extern "C" __declspec(dllexport) bool StartServer(char* vehicle_name, char* sim_mode_name, int port_number)
 {
+	LOGGER->WriteLog("Starting server for : " + std::string(sim_mode_name));
+	
 	std::thread server_thread(StartServerThread, vehicle_name, sim_mode_name, port_number);
 	server_thread.detach();
 	int waitCounter = 25; // waiting for maximum 5 seconds to start a server.
@@ -33,6 +32,8 @@ extern "C" __declspec(dllexport) void StopServer(char* vehicle_name)
 		delete key;
 		key = nullptr;
 	}
+
+	LOGGER->WriteLog("Server stopped");
 }
 
 extern "C" __declspec(dllexport) void CallTick(float deltaSeconds)
