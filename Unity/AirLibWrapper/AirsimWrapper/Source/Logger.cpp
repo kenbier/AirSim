@@ -18,7 +18,7 @@ Logger* Logger::GetLogger()
 
 				// Enabling all LogLevels,
 				logger->logLevel_Information = true;
-				logger->logLevel_Warnning = true;
+				logger->logLevel_Warning = true;
 				logger->logLevel_Error = true;
 
 				time_t now = time(0);
@@ -57,8 +57,8 @@ void Logger::SetLogLevel(LogLevel level, bool status)
 {
 	if (level == LogLevel::Information)
 		logLevel_Information = status;
-	else if (level == LogLevel::Warnning)
-		logLevel_Warnning = status;
+	else if (level == LogLevel::Warning)
+		logLevel_Warning = status;
 	else if (level == LogLevel::Error)
 		logLevel_Error = status;
 }
@@ -69,7 +69,7 @@ void Logger::WriteLog(const std::string log, LogLevel level)
 	{
 		fileStream << "\n[Information] \t<" << GetCurrentDateTime() << ">" << " \t" << log;
 	}
-	else if (logLevel_Warnning && level == LogLevel::Warnning)
+	else if (logLevel_Warning && level == LogLevel::Warning)
 	{
 		fileStream << "\n[Warnning] \t\t<" << GetCurrentDateTime() << ">" << " \t" << log;
 	}

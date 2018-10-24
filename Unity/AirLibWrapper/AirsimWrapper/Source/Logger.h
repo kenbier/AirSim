@@ -10,7 +10,7 @@ class Logger
 public:
 	enum LogLevel {
 		Information,
-		Warnning,
+		Warning,
 		Error
 	};
 
@@ -21,7 +21,7 @@ private:
 	std::string GetCurrentDateTime();
 
 	bool logLevel_Information;
-	bool logLevel_Warnning;
+	bool logLevel_Warning;
 	bool logLevel_Error;
 
 	static Logger* logger;
