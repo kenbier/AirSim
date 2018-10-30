@@ -21,9 +21,11 @@ namespace AirSimUnity {
         protected CollisionInfo collisionInfo;
         protected AirSimRCData rcData;
         protected bool resetVehicle;
-
+        protected float time_scale = 1.0f;
+        protected bool timeScale_changed = false;
         protected bool isApiEnabled = false;
         protected bool isServerStarted = false;
+        bool print_log_messages_ = true;
 
         protected List<DataCaptureScript> captureCameras = new List<DataCaptureScript>();
 
@@ -76,6 +78,12 @@ namespace AirSimUnity {
         protected void LateUpdate() {
             if (isServerStarted)
             {
+                if (timeScale_changed)
+                {
+                    Time.timeScale = time_scale;
+                    timeScale_changed = false;
+                }
+
                 if (isSegmentationUpdated)
                 {
                     UpdateSegmentationView();
@@ -94,6 +102,11 @@ namespace AirSimUnity {
                 {
                     hitResult = Physics.Linecast(startVec, endVec, out hitInfo);
                     calculateRayCast = false;
+                }
+
+                if (Input.GetKeyDown(KeyCode.T))
+                {
+                    print_log_messages_ = !print_log_messages_;
                 }
 
                 airsimInterface.InvokeTickInAirSim(Time.deltaTime);
@@ -190,6 +203,13 @@ namespace AirSimUnity {
             return new RayCastHitResult(hitResult, hitInfo.distance);
         }
 
+        public bool Pause(float timeScale)
+        {
+            time_scale = timeScale;
+            timeScale_changed = true;
+            return true;
+        }
+
         public CollisionInfo GetCollisionInfo() {
             return collisionInfo;
         }
@@ -251,6 +271,10 @@ namespace AirSimUnity {
         }
 
         public bool PrintLogMessage(string message, string messageParams, string vehicleName, int severity) {
+
+            if (!print_log_messages_)
+                return true;
+
             if (severity == 2) {
                 Debug.LogError(message + " " + messageParams + " Vehicle=" + vehicleName);
             } else if (severity == 1) {

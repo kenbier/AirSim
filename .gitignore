@@ -368,5 +368,5 @@ xcuserdata/
 /Unity/UnityDemo/Library
 /Unity/UnityDemo/Assembly-CSharp.csproj
 /Unity/UnityDemo/UnityDemo.sln
-Unity/UnityDemo/Logs/
-Unity/UnityDemo/Assets/Plugins/AirsimWrapper.dll
+/Unity/UnityDemo/Logs/
+/Unity/UnityDemo/Assets/Plugins/AirsimWrapper.dll

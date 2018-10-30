@@ -42,5 +42,7 @@ namespace AirSimUnity {
         AirSimVector GetVelocity();
 
         RayCastHitResult GetRayCastHit(AirSimVector start, AirSimVector end);
+
+        bool Pause(float timeScale);
     }
 }

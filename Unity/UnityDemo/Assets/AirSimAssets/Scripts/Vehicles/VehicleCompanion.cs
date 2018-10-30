@@ -100,7 +100,8 @@ namespace AirSimUnity {
                 Marshal.GetFunctionPointerForDelegate(new Func<string, UnityTransform>(GetTransformFromUnity)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, bool>(Reset)),
                 Marshal.GetFunctionPointerForDelegate(new Func<string, AirSimVector>(GetVelocity)),
-                Marshal.GetFunctionPointerForDelegate(new Func<AirSimVector, AirSimVector, string, RayCastHitResult>(GetRayCastHit))
+                Marshal.GetFunctionPointerForDelegate(new Func<AirSimVector, AirSimVector, string, RayCastHitResult>(GetRayCastHit)),
+                Marshal.GetFunctionPointerForDelegate(new Func<string, float, bool>(Pause))
             );
         }
 
@@ -198,6 +199,12 @@ namespace AirSimUnity {
 
         private static int GetSegmentationObjectId(string objectName) {
             return Vehicle.GetSegmentationObjectId(objectName);
+        }
+
+        private static bool Pause(string vehicleName, float timeScale)
+        {
+            var vehicle = Vehicles.Find(element => element.vehicleName == vehicleName);
+            return vehicle.VehicleInterface.Pause(timeScale);
         }
     }
 }

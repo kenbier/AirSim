@@ -53,26 +53,6 @@ namespace AirSimUnity {
         private new void LateUpdate() {
             if (isServerStarted)
             {
-                if (!isApiEnabled)
-                {
-                    rcData.is_valid = true;
-                    rcData.roll = Input.GetAxis("Horizontal");
-                    rcData.pitch = Input.GetAxis("Vertical");
-                    rcData.throttle = Input.GetAxis("Depth");
-                    rcData.yaw = Input.GetAxis("Yaw");
-                    rcData.left_z = 0;
-                    rcData.right_z = 0;
-
-                    rcData.switch1 = (uint) (Input.GetKeyDown("joystick button 0") ? 1 : 0);
-                    rcData.switch2 = (uint) (Input.GetKeyDown("joystick button 1") ? 1 : 0);
-                    rcData.switch3 = (uint) (Input.GetKeyDown("joystick button 2") ? 1 : 0);
-                    rcData.switch4 = (uint) (Input.GetKeyDown("joystick button 3") ? 1 : 0);
-                    rcData.switch5 = (uint) (Input.GetKeyDown("joystick button 4") ? 1 : 0);
-                    rcData.switch6 = (uint) (Input.GetKeyDown("joystick button 5") ? 1 : 0);
-                    rcData.switch7 = (uint) (Input.GetKeyDown("joystick button 6") ? 1 : 0);
-                    rcData.switch8 = (uint) (Input.GetKeyDown("joystick button 7") ? 1 : 0);
-                }
-
                 //Image capture is being done in base class
                 base.LateUpdate();
             }
