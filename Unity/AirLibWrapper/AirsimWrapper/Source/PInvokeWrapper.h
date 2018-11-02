@@ -4,6 +4,12 @@
 #include "UnityImageCapture.h"
 #include "vehicles/car/api/CarApiBase.hpp"
 
+
+#ifdef _WIN32
+	#define EXPORT __declspec(dllexport)
+#elif __linux__
+	#define EXPORT __attribute__((visibility("default")))
+#endif
 /*
 * Defines all the functions that can be called into Unity
 */
@@ -30,7 +36,8 @@ extern RayCastHitResult(*GetRayCastHit)(AirSimVector startVec, AirSimVector endV
 extern bool(*Pause)(const char* vehicleName, float timeScale);
 
 // PInvoke call to initialize the function pointers. This function is called from Unity.
-extern "C" __declspec(dllexport) void InitVehicleManager(
+
+extern "C" EXPORT void InitVehicleManager(
 	bool(*setPose)(AirSimPose pose, bool ignoreCollision, const char* vehicleName),
 	AirSimPose(*getPose)(const char* vehicleName),
 	AirSimCollisionInfo(*getCollisionInfo)(const char* vehicleName),
