@@ -46,6 +46,7 @@ public class InitializeAirSim : MonoBehaviour
     public static string GetAirSimSettingsFileName()
     {
         string fileName = Application.dataPath + "\\..\\settings.json";
+
         if (File.Exists(fileName))
         {
             return fileName;
