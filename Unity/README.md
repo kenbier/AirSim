@@ -40,3 +40,8 @@ In the meantime, you can setup your simulator in the Windows Unity editor, and b
 
 See the details [here](https://github.com/Microsoft/AirSim/blob/master/docs/apis.md) on how to interact with your Airsim simulation using the API's.  
 
+## Acknowledgement
+
+The drone object was provided by user 31415926 on [sketchfab](https://sketchfab.com/models/055841df0fb24cd4abde06a91f7d360a). It is licensed under the [CC License](https://creativecommons.org/licenses/by/4.0/).
+
+The rest of this project follows the same License as the Airsim project.

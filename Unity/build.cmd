@@ -3,10 +3,6 @@ msbuild AirLibWrapper\AirsimWrapper.sln  /target:Clean /target:Build  /property:
 if ERRORLEVEL 1 goto :buildfailed
 copy /Y AirLibWrapper\x64\Release\AirsimWrapper.dll  UnityDemo\Assets\Plugins
 
-REM // Download high poly drone asset
-REM // TODO 
- 
-
 REM //---------- done building ----------
 exit /b 0
 
