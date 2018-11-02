@@ -15,31 +15,43 @@ public class InitializeAirSim : MonoBehaviour
             {
                 if (AirSimSettings.GetSettings().SimMode == "")
                 {
-                    var option = EditorUtility.DisplayDialogComplex("SimMode is not specified in Settings.json!",
-                        "Please select desired SimMode as per loaded scene.",
-                        "Car", "Exit", "Multirotor");
-
-                    switch (option)
+                    if (Application.isEditor)
                     {
-                        case 2:
-                            AirSimSettings.GetSettings().SimMode = "Multirotor";
-                            break;
-                        case 1:
-                            EditorApplication.Exit(1);
-                            break;
-                        case 0:
-                            AirSimSettings.GetSettings().SimMode = "Car";
-                            break;
-                    }
-                }
+                        var option = EditorUtility.DisplayDialogComplex("SimMode is not specified in Settings.json!",
+                            "Please select desired SimMode as per loaded scene.",
+                            "Car", "Exit", "Multirotor");
 
+                        switch (option)
+                        {
+                            case 2:
+                                AirSimSettings.GetSettings().SimMode = "Multirotor";
+                                break;
+                            case 1:
+                                EditorApplication.Exit(1);
+                                break;
+                            case 0:
+                                AirSimSettings.GetSettings().SimMode = "Car";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        // Default to Car when Sim mode is missing.
+                        Debug.LogError("Sim mode is missing, defaulting to the Car demo");
+                        AirSimSettings.GetSettings().SimMode = "Car";
+                    }
+                    
+                }
                 LoadSceneAsPerSimMode();
             }
         }
         else
         {
-            EditorUtility.DisplayDialog("Missing 'Settings.json' file!!!", "'Settings.json' file either not present or not configured properly.", "Exit");
-            EditorApplication.Exit(1);
+            Debug.LogError("'Settings.json' file either not present or not configured properly.");
+            if (Application.isEditor) {
+                EditorUtility.DisplayDialog("Missing 'Settings.json' file!!!", "'Settings.json' file either not present or not configured properly.", "Exit");
+            }
+            Application.Quit();
         }
     }
 
