@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(AirsimWrapper LANGUAGES CXX)
-add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 
 
@@ -11,7 +10,9 @@ ENDIF()
 INCLUDE_DIRECTORIES ( "${EIGEN3_INCLUDE_DIR}"  )
 
 set (CMAKE_CXX_STANDARD 11)
-include(GNUInstallDirs)
+set (CMAKE_CXX_STANDARD_REQUIRED ON)
+#include(GNUInstallDirs)
+#add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 add_library(AirsimWrapper SHARED 
 	Source/Logger.cpp
@@ -54,7 +55,7 @@ find_library(AIRLIB_LIBRARY AirLib HINTS ../../../AirLib/lib)
 find_library(RPC_LIBRARY rpc HINTS ../../../AirLib/deps/rpclib/lib)
 
 
-target_link_libraries(AirsimWrapper  ${RPC_LIBRARY} ${AIRLIB_LIBRARY} ${MAVLINK_LIBRARY} )
+target_link_libraries( AirsimWrapper  ${RPC_LIBRARY} ${AIRLIB_LIBRARY} ${MAVLINK_LIBRARY} )
 
 
 install(TARGETS AirsimWrapper DESTINATION lib )
