@@ -1,6 +1,6 @@
 # Airsim on Unity
 
-* Airsim Unity allows you to run your simulators in the [Unity Engine](https://unity3d.com/). This project comes with some sample Unity projects and a wrapper around the AirLib library to run as a [native plugin](https://docs.unity3d.com/Manual/NativePlugins.html) in Unity. 
+* AirSim on Unity allows you to run your simulators in the [Unity Engine](https://unity3d.com/). This project comes with some sample Unity projects and a wrapper around the AirLib library to run as a [native plugin](https://docs.unity3d.com/Manual/NativePlugins.html) in Unity. 
 * Included are two basic Unity Projects, one for a Car simulator and another for a Drone simulator. They are meant to be lightweight, and can be used to verify your setup is correct. 
 * Check out the [Unity blogpost](https://blogs.unity3d.com/2018/11/14/airsim-on-unity-experiment-with-autonomous-vehicle-simulation/) for overview on the release.  
 
@@ -23,12 +23,13 @@ This project is still in early development, expect some rough edges. We are work
 #### Build Unity Project
 * Go inside the AirSim\Unity directory: `cd Unity`. 
 * Build the unity project: `build.cmd`.   
-* Additionally, there is a free environment `Windridge City` which you can download from [Unity Asset Store](https://www.assetstore.unity3d.com/). And, of course, you can always create your own environment.
+* Additionally, there is a free environment `Windridge City` which you can download from [Unity Asset Store](https://assetstore.unity.com/packages/3d/environments/roadways/windridge-city-132222). And, of course, you can always create your own environment.
 
 #### Usage 
 * Start Unity and click `Open project`. 
 * Select the folder `AirSim\Unity\UnityDemo`, and then hit the button `Select Folder`. 
-* In the bottom pane, Click on `Projects`->`Assets`->`Scenes`. Then, **Double-click** on `SimModeSelector`, `DroneDemo`, or `CarDemo`. 
+* In the bottom pane, Click on `Projects`->`
+s`->`Scenes`. Then, **Double-click** on `SimModeSelector`, `DroneDemo`, or `CarDemo`. 
 * Hit the play button to start the simulation (and hit play again to stop the simulation. .  
 * Alternatively, you can change the SimMode in your `Settings.json` file. (You can read more about [`Settings.json` here](https://github.com/Microsoft/AirSim/blob/master/docs/settings.md))
 * Controlling the car:    
